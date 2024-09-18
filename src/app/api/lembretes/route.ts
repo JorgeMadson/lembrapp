@@ -6,6 +6,7 @@ import { Pool } from "pg";
 const pool = new Pool(dbConfig);
 
 export async function GET() {
+    // Fazer um endpoint ou esse trazer também os eventos que acontecem essa semana, esse mês.
     try {
         const result = await pool.query('SELECT * FROM lembretes');
         return NextResponse.json({ result: result.rows }, { status: 200 });
@@ -19,7 +20,7 @@ export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
         const result = await pool.query(
-            'INSERT INTO lembretes(data_evento, nome) VALUES ($1, $2) RETURNING *',
+            'INSERT INTO lembretes(data_evento, nome) VALUES ($1, $2) RETURNING id',
             [body.data_evento, body.nome]
         );
         return NextResponse.json({ result: result.rows[0] }, { status: 200 });

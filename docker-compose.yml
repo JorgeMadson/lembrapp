@@ -5,6 +5,7 @@ services:
     container_name: lembrapp_db
     environment:
       POSTGRES_USER: postgres
+      PGUSER: postgres
       POSTGRES_PASSWORD: senha
       POSTGRES_DB: lembrapp
     healthcheck:
